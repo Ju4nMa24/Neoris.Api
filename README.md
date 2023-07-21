@@ -6,9 +6,9 @@ Para el correcto funcionamiento del web api se deben ejecutar los siguientes pas
 
 ~~~CMD
 
-Add-Migration Initial -p Aranda.Repository.SqlServer -s Aranda.Repository.SqlServer
+Add-Migration Initial -p Neoris.Repository -s Neoris.Repository
 
-Update-database -p Aranda.Repository.SqlServer -s Aranda.Repository.SqlServer
+Update-database -p Neoris.Repository -s Neoris.Repository
 ~~~
 
 **NOTA:**
