@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-
+#nullable disable
 namespace Neoris.Business.Commands.Person
 {
     public class PersonCommand : Base.CommandRequest<PersonResponse>

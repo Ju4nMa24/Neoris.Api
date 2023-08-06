@@ -9,6 +9,7 @@ using Neoris.Business.Commands.Transaction;
 
 namespace Neoris.Api.Controllers
 {
+    [AllowAnonymous]
     [Route("api/movimientos")]
     [ApiController]
     public class TransactionController : ControllerBase
@@ -27,7 +28,6 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]TransactionCommand request)
         {
@@ -39,7 +39,6 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] TEditCommand request)
         {
@@ -51,7 +50,6 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] TDeleteCommand request)
         {

@@ -1,5 +1,5 @@
 ﻿using Neoris.Abstractions.Types.Account;
-
+#nullable disable
 namespace Neoris.Commons.Types.Tables
 {
     public class Account : IAccount

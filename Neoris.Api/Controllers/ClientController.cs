@@ -7,6 +7,7 @@ using Neoris.Business.Commands.Client;
 
 namespace Neoris.Api.Controllers
 {
+    [AllowAnonymous]
     [Route("api/clientes")]
     [ApiController]
     public class ClientController : ControllerBase
@@ -25,7 +26,6 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]ClientCommand request)
         {
@@ -37,14 +37,12 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]EditCommand request)
         {
             EditResponse response = await _mediator.Send(request);
             return !response.InnerContext.Result.Success ? BadRequest(response?.InnerContext?.Result) : Ok(response);
         }
-        [AllowAnonymous]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody]DeleteCommand request)
         {

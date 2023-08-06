@@ -27,3 +27,6 @@ Se debe eliminar el contenido de la carpeta Migrations en la biblioteca de clase
 Url de repositorio: https://github.com/Ju4nMa24/Neoris.Api.git
 
 **Postman:** Se crea la siguiente colección en Postman para validación de los Endpoints: https://www.postman.com/speeding-crater-141527/workspace/neoris/collection/8167258-fd0fd981-dc3f-49b7-b116-43ef159e1d5d?action=share&creator=8167258
+
+Adicional se crea colección de Environments para un uso más sencillo: https://www.postman.com/speeding-crater-141527/workspace/neoris/environment/8167258-f6a66d77-05e1-405c-ba1f-514e7d0326ba
+

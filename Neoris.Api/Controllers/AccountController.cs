@@ -7,6 +7,7 @@ using Neoris.Business.Commands.Account;
 
 namespace Neoris.Api.Controllers
 {
+    [AllowAnonymous]
     [Route("api/cuentas")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -25,7 +26,6 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AccountCommand request)
         {
@@ -37,7 +37,6 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]ACEditCommand request)
         {
@@ -49,10 +48,11 @@ namespace Neoris.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody]ACDeleteCommand request)
         {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
             AccountDeleteResponse response = await _mediator.Send(request);
             return !response.InnerContext.Result.Success ? BadRequest(response?.InnerContext?.Result) : Ok(response);
         }

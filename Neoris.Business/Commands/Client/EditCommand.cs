@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-
+#nullable disable
 namespace Neoris.Business.Commands.Client
 {
     public class EditCommand : Base.CommandRequest<EditResponse>

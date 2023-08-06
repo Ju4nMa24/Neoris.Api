@@ -2,14 +2,13 @@
 using Microsoft.IdentityModel.Tokens;
 using Neoris.Abstractions.Repositories.Auth;
 using Newtonsoft.Json;
-using System.Buffers.Binary;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Neoris.Commons.Repositories
 {
+#nullable disable
     public class AuthRepository : IAuthenticationRepository
     {
         private IConfiguration _configuration { get; }
@@ -46,29 +45,6 @@ namespace Neoris.Commons.Repositories
             {
                 return Task.Run(() => ex.Message);
             }
-        }
-        /// <summary>
-        /// Method created for encryption and key generation.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        private string GenerateKey(string request)
-        {
-            RSA rsa = RSA.Create();
-            byte[] key = Encoding.UTF8.GetBytes(Convert.ToBase64String(rsa.ExportRSAPrivateKey()).Substring(DateTime.UtcNow.Minute, 32));
-            byte[] bytes = Encoding.UTF8.GetBytes(request);
-            int nonceSize = AesGcm.NonceByteSizes.MaxSize;
-            int tagSize = AesGcm.TagByteSizes.MaxSize;
-            int cipherSize = bytes.Length;
-            int dataLength = 4 + nonceSize + 4 + tagSize + cipherSize;
-            Span<byte> resultData = dataLength < 1024 ? stackalloc byte[dataLength] : new byte[dataLength].AsSpan();
-            BinaryPrimitives.WriteInt32LittleEndian(resultData.Slice(0, 4), nonceSize);
-            BinaryPrimitives.WriteInt32LittleEndian(resultData.Slice(4 + nonceSize, 4), nonceSize);
-            Span<byte> nonce = resultData.Slice(4, nonceSize);
-            RandomNumberGenerator.Fill(nonce);
-            using AesGcm aes = new AesGcm(key);
-            aes.Encrypt(nonce, bytes.AsSpan(), resultData.Slice(4 + nonceSize + 4 + tagSize, cipherSize), resultData.Slice(4 + nonceSize + 4, tagSize));
-            return Convert.ToBase64String(resultData);
         }
     }
 }
