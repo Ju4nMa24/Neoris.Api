@@ -4,6 +4,7 @@ namespace Neoris.Business.Commands.Account
 {
     public class AccountCommand : Base.CommandRequest<AccountResponse>
     {
+        #nullable disable
         public string Identification { get; set; }
         public string AccountNumber { get; set; }
         public string AccountType { get; set; }

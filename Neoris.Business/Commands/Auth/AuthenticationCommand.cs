@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-
+#nullable disable
 namespace Neoris.Business.Commands.Auth
 {
     public class AuthenticationCommand : Base.CommandRequest<AuthenticationResponse>

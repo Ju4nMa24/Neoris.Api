@@ -45,7 +45,7 @@ namespace Neoris.Business.Processors.Account
                     _response.InnerContext.Result.Success = true;
                     _response.Response = $"Cuenta del cliente identificado con No.: {request.Identification} registrada con exito...";
                 }
-                _logger.LogInformation($"Response: {_response.Response?.ToString()}", DateTimeOffset.UtcNow);
+                await Task.Run(() => _logger.LogInformation($"Response: {_response.Response?.ToString()}", DateTimeOffset.UtcNow));
                 return _response;
             }
             catch (Exception ex)

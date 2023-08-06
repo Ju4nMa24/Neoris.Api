@@ -34,17 +34,15 @@ namespace Neoris.Business.Processors.Transaction
             {
                 _logger.LogInformation($"Transaction: {request.Identification}", DateTimeOffset.UtcNow);
                 _response.InnerContext.Result.Success = false;
-                _response.StatusCode = "400";
-                _response.Response = "No se pudo procesar la solicitud...";
-                if (request is null)
-                    return _response;
+                _response.InnerContext.Result.ResponseCode = "400";
+                _response.InnerContext.Result.Response = "No se pudo procesar la solicitud...";
                 if (_repository.Delete(request.Identification))
                 {
                     _response.StatusCode = "200";
                     _response.InnerContext.Result.Success = true;
                     _response.Response = $"Se elimino la Transaccion exitosamente...";
                 }
-                _logger.LogInformation($"Response: {_response.Response}", DateTimeOffset.UtcNow);
+                await Task.Run(() => _logger.LogInformation($"Response: {_response.Response}", DateTimeOffset.UtcNow));
                 return _response;
             }
             catch (Exception ex)

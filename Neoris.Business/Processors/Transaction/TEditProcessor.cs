@@ -29,12 +29,12 @@ namespace Neoris.Business.Processors.Transaction
             {
                 _logger.LogInformation($"Client: {request.Identification}", DateTimeOffset.UtcNow);
                 _response.InnerContext.Result.Success = false;
-                _response.StatusCode = "400";
-                _response.Response = "No se pudo procesar la solicitud...";
+                _response.InnerContext.Result.ResponseCode = "400";
+                _response.InnerContext.Result.Response = "No se pudo procesar la solicitud...";
                 if (request is null)
                     return _response;
 
-                dynamic edit = _repository.Modify(new Commons.Types.Tables.Transaction()
+                dynamic? edit = _repository.Modify(new Commons.Types.Tables.Transaction()
                 {
                     TransactionValue = request.TransactionValue,
                     TransactionType = request.TransactionType,
@@ -47,7 +47,7 @@ namespace Neoris.Business.Processors.Transaction
                     _response.InnerContext.Result.Success = true;
                     _response.Response = edit;
                 }
-                _logger.LogInformation($"Registro actualizado con exito...", DateTimeOffset.UtcNow);
+                await Task.Run(() => _logger.LogInformation($"Registro actualizado con exito...", DateTimeOffset.UtcNow));
                 return _response;
             }
             catch (Exception ex)

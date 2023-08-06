@@ -37,7 +37,7 @@ namespace Neoris.Business.Processors.Account
                 _response.Response = "No se pudo procesar la solicitud...";
                 if (request is null)
                     return _response;
-                dynamic edit = _repository.Modify(new Commons.Types.Tables.Account()
+                dynamic? edit = _repository.Modify(new Commons.Types.Tables.Account()
                 {
                     AccountNumber = request.AccountNumber,
                     AccountType = request.AccountType,
@@ -50,7 +50,7 @@ namespace Neoris.Business.Processors.Account
                     _response.InnerContext.Result.Success = true;
                     _response.Response = edit;
                 }
-                _logger.LogInformation($"Response: {request.Identification}", DateTimeOffset.UtcNow);
+                await Task.Run(() => _logger.LogInformation($"Response: {request.Identification}", DateTimeOffset.UtcNow));
                 return _response;
             }
             catch (Exception ex)

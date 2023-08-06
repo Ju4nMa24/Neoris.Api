@@ -15,7 +15,7 @@ namespace Neoris.Abstractions.Repositories.Account
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public dynamic Modify(IAccount account, string identificationNumber);
+        public dynamic? Modify(IAccount account, string identificationNumber);
         /// <summary>
         /// This method is used to delete account.
         /// </summary>
@@ -27,6 +27,6 @@ namespace Neoris.Abstractions.Repositories.Account
         /// </summary>
         /// <param name="identificationNumber"></param>
         /// <returns></returns>
-        public IAccount Get(string identificationNumber);
+        public IAccount? Get(string identificationNumber);
     }
 }

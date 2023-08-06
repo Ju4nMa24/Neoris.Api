@@ -57,11 +57,15 @@ namespace Neoris.Repositories.Services.Clients
             try
             {
                 _logger.LogInformation($"Client Delete: {identificationNumber}", DateTimeOffset.UtcNow);
-                Guid personValidate = _context.Person.FirstOrDefault(p => p.Identification == identificationNumber).PersonId;
-                if (personValidate.ToString() != string.Empty)
+                Person? personValidate = _context.Person.FirstOrDefault(p => p.Identification == identificationNumber);
+                if (personValidate is not null)
                 {
-                    _context.Client.Remove(_context.Client.FirstOrDefault(c => c.PersonId == personValidate));
-                    _context.SaveChanges();
+                    Client? client = _context.Client.FirstOrDefault(c => c.PersonId == personValidate.PersonId);
+                    if(client is not null) 
+                    {
+                        _context.Client.Remove(client);
+                        _context.SaveChanges();
+                    }
                     return true;
                 }
                 else
@@ -78,10 +82,10 @@ namespace Neoris.Repositories.Services.Clients
         /// </summary>
         /// <param name="identificationNumber"></param>
         /// <returns></returns>
-        public IClient Get(string identificationNumber)
+        public IClient? Get(string identificationNumber)
         {
             Person? data = _context.Person.FirstOrDefault(p => p.Identification == identificationNumber);
-            return (IClient)_context.Client.Find(data.PersonId);
+            return data is not null ? _context.Client.Find(data.PersonId) : new Client();
         }
         /// <summary>
         /// This method is used to modify Client.
@@ -102,8 +106,9 @@ namespace Neoris.Repositories.Services.Clients
                         clientModify.Status = client.Status;
                         clientModify.Password = client.Password;
                         _context.SaveChanges();
+                        return clientModify;
                     }
-                    return clientModify;
+                    return new Client();
                 }
                 else
                     return new Client();

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-
+#nullable disable
 namespace Neoris.Business.Commands.Client
 {
     public class ClientCommand : Base.CommandRequest<ClientResponse>

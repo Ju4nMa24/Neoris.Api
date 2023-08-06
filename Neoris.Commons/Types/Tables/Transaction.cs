@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Neoris.Commons.Types.Tables
 {
+    #nullable disable
     public class Transaction : ITransaction
     {
         public Guid TransactionId { get; set; }

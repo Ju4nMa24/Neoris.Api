@@ -27,6 +27,6 @@ namespace Neoris.Abstractions.Repositories.Persons
         /// </summary>
         /// <param name="identificationNumber"></param>
         /// <returns></returns>
-        public IPerson Get(string identificationNumber);
+        public IPerson? Get(string identificationNumber);
     }
 }

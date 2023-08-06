@@ -27,6 +27,6 @@ namespace Neoris.Abstractions.Repositories.Clients
         /// </summary>
         /// <param name="identificationNumber"></param>
         /// <returns></returns>
-        public IClient Get(string identificationNumber);
+        public IClient? Get(string identificationNumber);
     }
 }

@@ -78,7 +78,7 @@ namespace Neoris.Repositories.Services.Persons
         /// </summary>
         /// <param name="identificationNumber"></param>
         /// <returns></returns>
-        public IPerson Get(string identificationNumber) => (IPerson)_context.Person?.FirstOrDefault(p => p.Identification == identificationNumber);
+        public IPerson? Get(string identificationNumber) => _context.Person?.FirstOrDefault(p => p.Identification == identificationNumber);
         /// <summary>
         /// This method is used to modify person.
         /// </summary>

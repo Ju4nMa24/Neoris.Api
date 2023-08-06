@@ -15,7 +15,7 @@ namespace Neoris.Abstractions.Repositories.Transaction
         /// </summary>
         /// <param name="Transaction"></param>
         /// <returns></returns>
-        public dynamic Modify(ITransaction transaction, string identificationNumber);
+        public dynamic? Modify(ITransaction transaction, string identificationNumber);
         /// <summary>
         /// This method is used to delete Transaction.
         /// </summary>
@@ -27,6 +27,6 @@ namespace Neoris.Abstractions.Repositories.Transaction
         /// </summary>
         /// <param name="identificationNumber"></param>
         /// <returns></returns>
-        public ITransaction Get(string identificationNumber);
+        public ITransaction? Get(string identificationNumber);
     }
 }
